@@ -14,6 +14,11 @@ int main(){
 	//string t = s;
 	Xml x(s);
 	cout << x;
+
+	cout << endl;
+	string w("abd&gt;dfd&lt;&amp;amp;\"\"&quot;&apos;");
+	replace(w);
+	cout << w<<endl;
 	system("pause");
 	return 0;
 }
