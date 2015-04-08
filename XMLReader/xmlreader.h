@@ -6,7 +6,7 @@
 #include <iostream>
 
 namespace NewYorkTime{
-	const std::string SPACE = " \t";
+	const std::string SPACE = " \t\n";
 
 	class XmlNode{
 	public:
@@ -19,7 +19,7 @@ namespace NewYorkTime{
 			int tag_end = name.find_first_of(SPACE + ">/", tag_start);
 			this->tag = name.substr(tag_start, tag_end - tag_start);
 			if (content[end - 1] != '/'){
-				int tmp = content.rfind("</" + tag + ">");
+				int tmp = content.find("</" + tag + ">");
 				this->text = content.substr(end + 1, tmp - end - 1);
 				isSelfClose = false;
 			}
@@ -107,9 +107,9 @@ namespace NewYorkTime{
 				pos = end + 2;
 			}
 			start = content.find("<!",pos);
-			end = content.find("!>",pos);
+			end = content.find(">",pos);
 			if (start != std::string::npos && end != std::string::npos){
-				xmlDocType = content.substr(start, end - start + 2);
+				xmlDocType = content.substr(start, end - start + 1);
 				pos = end + 2;
 			}
 			root = new XmlNode(content.substr(pos));
@@ -119,6 +119,11 @@ namespace NewYorkTime{
 			delete root;
 		}
 		const XmlNode& getRoot()const{ return *root; }
+		friend std::ostream& operator << (std::ostream & os,const Xml& x){
+			os << x.xmlDecl << "\n" << x.xmlDocType << "\n";
+			os << *x.root;
+			return os;
+		}
 	private:
 		XmlNode *root;
 		std::string xmlDecl;
