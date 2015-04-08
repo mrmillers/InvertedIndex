@@ -3,6 +3,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <iostream>
 
 namespace NewYorkTime{
 	const std::string SPACE = " \t";
@@ -20,7 +21,10 @@ namespace NewYorkTime{
 			if (content[end - 1] != '/'){
 				int tmp = content.rfind("</" + tag + ">");
 				this->text = content.substr(end + 1, tmp - end - 1);
-				isSimpleTag = false;
+				isSelfClose = false;
+			}
+			else{
+				isSelfClose = true;
 			}
 
 			int attr_start = tag_end;
@@ -35,10 +39,11 @@ namespace NewYorkTime{
 			}
 
 			while (text.find("<") != std::string::npos && text.find(">") != std::string::npos){
+				isSimpleTag = false;
 				XmlNode* tmp = new XmlNode(text);
 				nodes[tmp->tag] = tmp;
 				int end;
-				if (tmp->isSimpleTag) {
+				if (tmp->isSelfClose) {
 					end = text.find("/>") + 2;
 				}
 				else{
@@ -58,17 +63,40 @@ namespace NewYorkTime{
 				delete itr->second;
 			}
 		}
+		friend std::ostream & operator << (std::ostream & os,const XmlNode& xn) {
+			os << "<" << xn.tag <<" ";
+			for (std::map<std::string, std::string>::const_iterator itr = xn.attr.begin(); itr != xn.attr.end(); ++itr){
+				os << itr->first << "=" "\"" << itr->second << "\" ";
+			}
+			if (xn.isSelfClose) os << "/>\n";
+			else{
+				os << ">\n";
+				if (xn.isSimpleTag){
+					os << xn.text<<"\n";
+				}
+				else{
+					for (std::map<std::string, XmlNode*>::const_iterator itr = xn.nodes.begin(); itr != xn.nodes.end(); ++itr){
+						os << *itr->second;
+					}
+					
+				}
+				os << "</" << xn.tag << ">\n";
+			}
+			return os;
+		}
 	private:
 		std::string  text, tag;
 		std::map<std::string, XmlNode *> nodes;
 		std::map<std::string, std::string> attr;
-		bool isSimpleTag;
+		bool isSimpleTag,isSelfClose;
 	};
 	class Xml{
 	public:
 		Xml(std::string content){
 			int comment_start = 0;
-			while ((comment_start = content.find("",comment_start))!=std::string::npos){
+			while ((comment_start = content.find("<!--"))!=std::string::npos){
+				int comment_end = content.find("-->",comment_start);
+				content.replace(comment_start,comment_end + 3 - comment_start,"");
 			}
 
 			int pos = 0;
