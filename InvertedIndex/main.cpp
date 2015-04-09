@@ -26,7 +26,7 @@ static int fileSize = 300<<20;
 static bool isDebug = false;
 static InvertedList *il = NULL;//new InvertedList("../data/list", "../data/tmp", isDebug);
 
-
+/*
 void gen(){
 	MultiFile * list = new MultiFile("../data/list",false);
 	list->setFileSize(fileSize);
@@ -65,8 +65,8 @@ inline double bm25(double n, double N, double f, double dlrate = 1, double qf = 
 	double third = (k2 + 1)*qf / (k2 + qf);
 	return log10(first) *second * third;
 }
-
-
+*/
+/*
 void query(string s){
 	struct Score{
 		int id;
@@ -110,7 +110,7 @@ void query(string s){
 		//if (total % 100 == 0) cout << total <<" "<< did << endl;
 		int d = 0;
 		for (int i = 1; (i<lp.size()) && (( d = il->nextGEQ(lp[i], did)) == did); i++);
-		if (d > did || d == -1) did = d; /* not in intersection */
+		if (d > did || d == -1) did = d; // not in intersection 
 		else
 		{
 			Score s;
@@ -197,4 +197,8 @@ int main (int argc, char * argv[])
 	system("pause");
 	_CrtDumpMemoryLeaks();
 	return 0;
+}
+*/
+int main(){
+
 }

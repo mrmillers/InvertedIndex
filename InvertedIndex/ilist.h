@@ -2,7 +2,7 @@
 #define INVERTED_LIST
 
 #include <stdio.h>
-#include <string.h>
+#include <string>
 #include <vector>
 #include <map>
 #include "multifile.h"
@@ -17,7 +17,7 @@ public:
 	
 	//for generate 
 	void create();
-	void feed(const Html *h);
+	void feed(const std::string&);
 	void mergSort(int maxLen = 100<<20);
 	void finish();
 	

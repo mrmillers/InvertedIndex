@@ -4,8 +4,8 @@
 #include <queue>
 #include <ctype.h>
 #include "ilist.h"
-#include "parser.h"
 
+using namespace std;
 
 
 InvertedList::InvertedList(char *listDir,char *tmpDir,bool isDebug){
@@ -48,22 +48,15 @@ InvertedList::~InvertedList(){
 	
 }
 
-void InvertedList::feed(const Html* html){
+void InvertedList::feed(const string& text){
 	//fprintf(iUrl, "%d %s\n", urlCnt++, html->url);
 	urlCnt++;
-	char *back  = (char *)malloc(sizeof(char)*html->len * 2);
-	char *lexs = back;
-	char* url = copyStr(html->url);
-	char* page = copyStr(html->getHtml());
-	
+	char * lexs = copyStr(text.c_str());
 	*lexs = 0;
-	parser(url,page,lexs,html->len*2);
-	free(url);
-	free(page);
-
 	std::map<int,std::vector<int>>docWord;
 	int id,pos = 0;
 	char* tag,*lex;
+
 	while (*lexs){
 		lex = lexs;
 		while (*lexs && (*lexs != '\n')){
@@ -73,14 +66,6 @@ void InvertedList::feed(const Html* html){
 		for (tag = lexs - 1; *(tag-1); tag--);
 		if (*lexs) *(lexs++) = 0;
 		
-		
-		/*lex = lexs;
-		while (*lexs && (*lexs != ' ')) lexs++;
-		if (*lexs) *(lex++) = 0;
-		tag = lexs;
-		while (*lexs && (*lexs != '\n')) lexs++;
-		if (*lexs) *(lex++) = 0;
-		*/
 		if (tag - lex > 255) lex[255] = 0;
 		if (wordsID.find(lex)!=wordsID.end()){
 			id = wordsID.find(lex)->second;
@@ -99,7 +84,7 @@ void InvertedList::feed(const Html* html){
 		pos++;
 	}
 
-	fprintf(iUrl, "%d %d %s\n", urlCnt,pos, html->url);
+	fprintf(iUrl, "%d %d %d\n", urlCnt,pos, urlCnt);
 
 	unsigned int *buffer = NULL;
 	unsigned int *outBuffer = NULL;
@@ -136,7 +121,7 @@ void InvertedList::feed(const Html* html){
 	}
 	free(buffer);
 	free(outBuffer);
-	free(back);//backup pointer for lexs
+	free(lexs);//backup pointer for lexs
 
 }
 

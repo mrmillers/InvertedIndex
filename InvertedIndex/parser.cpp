@@ -113,7 +113,7 @@ int tag_parser(char* tag, int len, char* back_tag)
 
 int parser(char* url, char* doc, char* buf, int blen)
 {
-	char *p, *purl, *word, *ptag, *pbuf;
+	char *p, *purl, *word, *ptag = NULL, *pbuf;
 	char ch, back_tag, intag, inscript;
 	unsigned tag_flag;
 	int ret;
