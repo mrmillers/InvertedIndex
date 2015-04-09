@@ -70,6 +70,8 @@ namespace NewYorkTime{
 				}
 				text = text.substr(end);
 			}
+			if (!isSimpleTag) text = "";
+			replace(text);
 
 		}
 		XmlNode(const XmlNode & x) :text(x.text), tag(x.tag), attr(x.attr){
