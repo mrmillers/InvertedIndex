@@ -7,12 +7,12 @@
 #include <fstream>
 namespace NewYorkTime{
 	static std::vector<std::string> getFiles(std::string names, std::string dir = "."){
-		std::string cmd = "cd " + dir + "\ndir /b /s " + names + " > tmp";
+		std::string cmd = "cd " + dir + "\ndir /b /s " + names + " > fileList";
 		std::ofstream outf("script.bat");
 		outf << cmd;
 		outf.close();
 		system("script.bat");
-		std::ifstream inf(dir + "/tmp");
+		std::ifstream inf(dir + "/fileList");
 		std::vector<std::string> v;
 		std::string c;
 		while (std::getline(inf, c)){

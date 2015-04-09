@@ -117,7 +117,26 @@ namespace NewYorkTime{
 				return ret;
 			}
 		}
-	
+		void getNodesByTag(std::string tag, std::vector<const XmlNode*>& v)const{
+			if (this->tag == tag)
+				v.push_back(this);
+			else{
+				for (int i = 0; i < this->nodes.size(); i++){
+					nodes[i]->getNodesByTag(tag,v);
+				}
+			}
+		}
+		std::vector<const XmlNode*> getNodesByTag(std::string tag)const{
+			std::vector<const XmlNode*>v;
+			if (this->tag == tag)
+				v.push_back(this);
+			else{
+				for (int i = 0; i < this->nodes.size(); i++){
+					nodes[i]->getNodesByTag(tag, v);
+				}
+			}
+			return v;
+		}
 	private:
 		std::string  text, tag;
 		std::vector<XmlNode*>nodes;

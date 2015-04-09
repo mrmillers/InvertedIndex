@@ -27,7 +27,9 @@ int main(){
 	fprintf(stderr, "Reading xml files...\n");
 	vector<string> xmls = getFiles("*.xml", "../../TestData");
 	for (unsigned int i = 0; i < xmls.size();i++){
-		il->feed(readFile(xmls[i]));
+		Xml xml(readFile(xmls[i]));
+		string s = xml.getRoot().getAllText();
+		//il->feed();
 		printf("%d ", fileCnt++);
 	}
 	il->mergSort(fileSize);

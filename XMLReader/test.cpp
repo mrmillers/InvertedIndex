@@ -21,8 +21,11 @@ int main(){
 	cout << w << endl;
 
 	cout << x.getRoot().getAllText() << endl;
+	cout << "------------------------------------------" << endl;
+	vector<const XmlNode*> list(x.getRoot().getNodesByTag("head"));
+	for (int i = 0; i < list.size(); i++){
+		cout << list[i]->getAllText() << endl;
+	}
 	system("pause");
-
-
 	return 0;
 }
