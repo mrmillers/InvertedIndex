@@ -12,21 +12,6 @@
 
 class InvertedList{
 public:
-	/*class ListContent{
-	public:
-		~ListContent();
-		ListContent(char *word,int id);
-		void addDoc(int id,int * tags, int* pos);
-	private:
-		char *word;
-		int wordID, wordCnt;
-		int docCnt;
-		std::vector<int> docID;
-		std::vector < int *> tags;
-		std::vector<int *>pos;
-		
-	};*/
-	
 	InvertedList(char * listDir,char *tmpDir,bool isDebug = false);
 	~InvertedList();
 	
@@ -34,7 +19,6 @@ public:
 	void create();
 	void feed(const Html *h);
 	void mergSort(int maxLen = 100<<20);
-	void bucketSort();
 	void finish();
 	
 	//for query

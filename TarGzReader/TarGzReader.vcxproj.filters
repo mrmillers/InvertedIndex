@@ -18,15 +18,15 @@
     <ClInclude Include="files.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\InvertedIndex\gzreader.h">
+    <ClInclude Include="gzreader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\InvertedIndex\gzreader.cpp">
+    <ClCompile Include="test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test.cpp">
+    <ClCompile Include="gzreader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -68,11 +68,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\InvertedIndex\gzreader.h" />
     <ClInclude Include="files.h" />
+    <ClInclude Include="gzreader.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\InvertedIndex\gzreader.cpp" />
+    <ClCompile Include="gzreader.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
