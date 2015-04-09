@@ -64,6 +64,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="compresser.cpp" />
+    <ClCompile Include="gzreader.cpp" />
+    <ClCompile Include="ilist.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="multifile.cpp" />
+    <ClCompile Include="parser.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="compresser.h" />
+    <ClInclude Include="gzreader.h" />
+    <ClInclude Include="ilist.h" />
+    <ClInclude Include="multifile.h" />
+    <ClInclude Include="parser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
