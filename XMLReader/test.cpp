@@ -7,7 +7,7 @@ using namespace NewYorkTime;
 
 
 int main(){
-	ifstream infile("../../TestData/0001710.xml");
+	ifstream infile("../../TestData/0009873.xml");
 	string s((istreambuf_iterator<char>(infile)), istreambuf_iterator<char>());
 	//cout << s;
 	//XmlNode xn();
@@ -26,6 +26,9 @@ int main(){
 	for (int i = 0; i < list.size(); i++){
 		cout << list[i]->getAllText() << endl;
 	}
+	cout << "------------------------------------------" << endl;
+	const XmlNode * tt = x.getRoot().getNodeByTag("w");
+	cout << tt;
 	system("pause");
 	return 0;
 }

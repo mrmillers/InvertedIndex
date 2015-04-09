@@ -33,7 +33,7 @@ namespace NewYorkTime{
 			int start = content.find("<");
 			int end = content.find(">");
 
-			std::string name = content.substr(start, end - start + 1);
+ 			std::string name = content.substr(start, end - start + 1);
 			int tag_start = name.find_first_not_of(SPACE, 1);
 			int tag_end = name.find_first_of(SPACE + ">/", tag_start);
 			this->tag = name.substr(tag_start, tag_end - tag_start);
@@ -136,6 +136,13 @@ namespace NewYorkTime{
 				}
 			}
 			return v;
+		}
+		const XmlNode* getNodeByTag(const std::string& tag)const{
+			std::vector<const XmlNode*>v;
+			getNodesByTag(tag,v);
+			if (v.size()>0)
+				return v[0];
+			return NULL;
 		}
 	private:
 		std::string  text, tag;

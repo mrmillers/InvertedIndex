@@ -48,11 +48,11 @@ InvertedList::~InvertedList(){
 	
 }
 
-void InvertedList::feed(const string& text){
+void InvertedList::feed(const Page& page){
 	//fprintf(iUrl, "%d %s\n", urlCnt++, html->url);
 	urlCnt++;
-	char * lexs = copyStr(text.c_str());
-	*lexs = 0;
+	char * lexs = copyStr(page.content.c_str());
+	char * back = lexs;
 	std::map<int,std::vector<int>>docWord;
 	int id,pos = 0;
 	char* tag,*lex;
@@ -84,7 +84,7 @@ void InvertedList::feed(const string& text){
 		pos++;
 	}
 
-	fprintf(iUrl, "%d %d %d\n", urlCnt,pos, urlCnt);
+	fprintf(iUrl, "%d %d %s\n", urlCnt,pos, page.title.c_str());
 
 	unsigned int *buffer = NULL;
 	unsigned int *outBuffer = NULL;
@@ -121,7 +121,7 @@ void InvertedList::feed(const string& text){
 	}
 	free(buffer);
 	free(outBuffer);
-	free(lexs);//backup pointer for lexs
+	free(back);//backup pointer for lexs
 
 }
 

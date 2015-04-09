@@ -9,6 +9,10 @@
 #include "compresser.h"
 #include "gzreader.h"
 
+struct Page{
+	std::string title;
+	std::string content;
+};
 
 class InvertedList{
 public:
@@ -17,7 +21,7 @@ public:
 	
 	//for generate 
 	void create();
-	void feed(const std::string&);
+	void feed(const Page&);
 	void mergSort(int maxLen = 100<<20);
 	void finish();
 	
