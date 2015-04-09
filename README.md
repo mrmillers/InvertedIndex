@@ -1,1 +1,1 @@
-# New York Times articles recommender system
+# New York Times Articles Recommender System
