@@ -215,7 +215,8 @@ void InvertedList::load(){
 	fseek(iUrl, 0, SEEK_SET);
 	fprintf(stderr, "Loading Url\n");
 	totalDocLen = 0;
-	while (fscanf(iUrl, "%d%d%s", &id,&pos, s) != EOF){
+	while (fscanf(iUrl, "%d%d", &id,&pos) != EOF){
+		fgets(s, 102000, iUrl);
 		idUrl.push_back(copyStr(s));
 		idLen.push_back(pos);
 		totalDocLen += pos;
