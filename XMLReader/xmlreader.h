@@ -60,7 +60,7 @@ namespace NewYorkTime{
 			while (text.find("<") != std::string::npos && text.find(">") != std::string::npos){
 				isSimpleTag = false;
 				XmlNode* tmp = new XmlNode(text);
-				nodes[tmp->tag] = tmp;
+				nodes.push_back( tmp );
 				int end;
 				if (tmp->isSelfClose) {
 					end = text.find("/>") + 2;
@@ -75,14 +75,13 @@ namespace NewYorkTime{
 
 		}
 		XmlNode(const XmlNode & x) :text(x.text), tag(x.tag), attr(x.attr){
-			for (std::map<std::string, XmlNode*>::const_iterator itr = x.nodes.begin(); itr != x.nodes.end(); ++itr){
-				nodes[itr->first] = new XmlNode(*itr->second);
+			for (unsigned int i = 0; i < nodes.size();i++){
+				nodes[i] = new XmlNode(*x.nodes[i]);
 			}
 		}
 		~XmlNode(){
-			for (std::map<std::string, XmlNode*>::iterator itr = nodes.begin(); itr != nodes.end(); ++itr){
-				delete itr->second;
-			}
+			for (unsigned int i = 0; i < nodes.size(); i++)
+				delete nodes[i];
 		}
 		friend std::ostream & operator << (std::ostream & os, const XmlNode& xn) {
 			os << "<" << xn.tag << " ";
@@ -96,8 +95,8 @@ namespace NewYorkTime{
 					os << xn.text << "\n";
 				}
 				else{
-					for (std::map<std::string, XmlNode*>::const_iterator itr = xn.nodes.begin(); itr != xn.nodes.end(); ++itr){
-						os << *itr->second;
+					for (unsigned int i = 0; i < xn.nodes.size(); i++){
+						os << *xn.nodes[i];
 					}
 
 				}
@@ -105,9 +104,23 @@ namespace NewYorkTime{
 			}
 			return os;
 		}
+		
+		std::string getText()const{ return text; }
+		std::string getAllText()const {
+			if (isSimpleTag)
+				return text;
+			else{
+				std::string ret;
+				for (unsigned int i = 0; i < nodes.size();i++){
+					ret += nodes[i]->getAllText() + " ";
+				}
+				return ret;
+			}
+		}
+	
 	private:
 		std::string  text, tag;
-		std::map<std::string, XmlNode *> nodes;
+		std::vector<XmlNode*>nodes;
 		std::map<std::string, std::string> attr;
 		bool isSimpleTag, isSelfClose;
 	};

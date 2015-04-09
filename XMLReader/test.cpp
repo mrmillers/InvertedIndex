@@ -7,8 +7,8 @@ using namespace NewYorkTime;
 
 
 int main(){
-	ifstream infile("../../TestData/0001503.xml");
-	string s((istreambuf_iterator<char>(infile)),istreambuf_iterator<char>());
+	ifstream infile("../../TestData/0001710.xml");
+	string s((istreambuf_iterator<char>(infile)), istreambuf_iterator<char>());
 	//cout << s;
 	//XmlNode xn();
 	//string t = s;
@@ -18,7 +18,11 @@ int main(){
 	cout << endl;
 	string w("abd&gt;dfd&lt;&amp;amp;\"\"&quot;&apos;");
 	replace(w);
-	cout << w<<endl;
+	cout << w << endl;
+
+	cout << x.getRoot().getAllText() << endl;
 	system("pause");
+
+
 	return 0;
 }
