@@ -78,6 +78,7 @@
     <ClCompile Include="..\InvertedIndex\gzreader.cpp" />
     <ClCompile Include="..\InvertedIndex\ilist.cpp" />
     <ClCompile Include="..\InvertedIndex\multifile.cpp" />
+    <ClCompile Include="..\XMLReader\xmlreader.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

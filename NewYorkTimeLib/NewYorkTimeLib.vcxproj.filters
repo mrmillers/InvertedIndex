@@ -32,5 +32,8 @@
     <ClCompile Include="..\InvertedIndex\compresser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\XMLReader\xmlreader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
