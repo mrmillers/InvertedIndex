@@ -64,10 +64,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="textparser.h" />
     <ClInclude Include="xmlreader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="textparser.cpp" />
     <ClCompile Include="xmlreader.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

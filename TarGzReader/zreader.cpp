@@ -1,8 +1,8 @@
-#include "gzreader.h"
-#include <zlib.h>
+#include "zreader.h"
+/*#include <zlib.h>
 #include <string.h>
-#include <stdlib.h>
-
+#include <stdlib.h>*/
+/*
 GzReader::GzReader(const char* path,int start){
 	dir = (char *)malloc(sizeof(char) * (strlen(path) + 2));
 	strcpy(dir,path);
@@ -142,22 +142,4 @@ long GzReader::uncompress(FILE *fp){
 	cnt = outBufferSize - zs->avail_out;
 	outBuffer[cnt] = 0;
 	return cnt;
-}
-
-
-
-Html::~Html(){
-	free(html);
-}
-Html::Html(){
-	html = NULL;
-}
-const char* Html::getHtml()const{
-	return html;
-}
-
-void Html::setHtml(char *s){
-	html = (char*)realloc(html,sizeof(char) * (len + 2));
-	strncpy(html,s,len);
-	html[len] = 0;
-}
+}*/

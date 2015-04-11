@@ -18,15 +18,21 @@
     <ClInclude Include="files.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gzreader.h">
+    <ClInclude Include="zreader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="archive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="archive_entry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="test.cpp">
+    <ClCompile Include="zreader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gzreader.cpp">
+    <ClCompile Include="test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

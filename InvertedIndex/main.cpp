@@ -23,7 +23,7 @@
 using namespace std;
 static int fileSize = 300<<20;
 static bool isDebug = false;
-static InvertedList *il = NULL;//new InvertedList("../data/list", "../data/tmp", isDebug);
+//static InvertedList *il = NULL;//new InvertedList("../data/list", "../data/tmp", isDebug);
 
 /*
 void gen(){

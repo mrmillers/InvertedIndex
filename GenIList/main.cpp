@@ -1,9 +1,4 @@
-/*#include "XMLReader/xmlreader.h"
-#include "TarGzReader/files.h"
-#include "InvertedIndex/ilist.h"
-#include "InvertedIndex/multifile.h"*/
 #include "NewYorkTimeLib/NewYorkTime.h"
-#include "parser.h"
 #include <string>
 #include <fstream>
 #include <iostream>

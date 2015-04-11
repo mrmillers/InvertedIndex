@@ -1,25 +1,42 @@
-#include "files.h"
-#include "gzreader.h"
-using namespace std;
+/*
+* This file is in the public domain.
+*
+* Feel free to use it as you wish.
+*/
 
-int main(){
-	/*vector<string> v = getFiles("*.xml","../../TestData");
-	for (int i = 0; i < v.size(); i++){
-		cout << v[i] << endl;
+/*
+* This example program reads an archive from stdin (which can be in
+* any format recognized by libarchive) and writes certain entries to
+* an uncompressed ustar archive on stdout.  This is a template for
+* many kinds of archive manipulation: converting formats, resetting
+* ownership, inserting entries, removing entries, etc.
+*
+* To compile:
+* gcc -Wall -o tarfilter tarfilter.c -larchive -lz -lbz2
+*/
+
+#include <sys/stat.h>
+#include "zreader.h"
+
+#include "archive.h"
+#include "archive_entry.h"
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+using namespace std;
+using namespace NewYorkTime;
+int main(int argc, char **argv){
+	{
+		ZReader z;
 	}
-	*/
-	Html* h;
-	GzReader *gz = new GzReader("../../TestData");
-	while (gz->nextFile()){
-		while (h = gz->nextPage()){
-			//pageCnt++;
-			//if (pageCnt % 10000 == 0)printf("\n %d ", pageCnt);
-			//il->feed(h);
-			
-			//if (pageCnt == 2) break;
-		}
-		//printf("%d ", fileCnt++);
+	ZReader z;
+	z.readFromFile("../../TestData/01.tgz");
+	string t;
+	for (int i = 0; i < 10;i++){
+		z.nextEntry(FileType::Regular);
+		t = z.read();
+		cout << t << endl;
 	}
-	system("pause");
 	return 0;
 }

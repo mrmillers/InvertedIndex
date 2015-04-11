@@ -18,12 +18,18 @@
     <ClInclude Include="xmlreader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="textparser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="xmlreader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="textparser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -6,7 +6,7 @@
 #include "ilist.h"
 
 using namespace std;
-
+using namespace NewYorkTime;
 
 InvertedList::InvertedList(char *listDir,char *tmpDir,bool isDebug){
 	com = new Simple9();

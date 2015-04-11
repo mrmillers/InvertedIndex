@@ -25,7 +25,6 @@ namespace NewYorkTime{
 	static std::string readFile(std::string fileName){
 		std::ifstream infile(fileName);
 		return std::string((std::istreambuf_iterator<char>(infile)), std::istreambuf_iterator<char>());
-		
 	}
 }
 
