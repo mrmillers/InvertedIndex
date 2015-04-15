@@ -27,9 +27,6 @@
     <ClCompile Include="compresser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gzreader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ilist.h">
@@ -39,9 +36,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="multifile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gzreader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

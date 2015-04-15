@@ -10,7 +10,6 @@
 #include <vector>
 #include <queue>
 #include <string>
-#include "gzreader.h"
 #include "compresser.h"
 #include "multifile.h"
 #include "ilist.h"

@@ -2,7 +2,7 @@
 #include <cctype>
 using namespace NewYorkTime;
 using namespace std;
-string NewYorkTime::parse(const string& s){
+string NewYorkTime::addTagP(const string& s){
 	using namespace std;
 	//string s = (xml.getRoot().getNodesByTag("head"))[0]->getAllText();
 	string t;

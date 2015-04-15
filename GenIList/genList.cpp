@@ -5,47 +5,12 @@
 #include <vector>
 #include <queue>
 
-
 using namespace std;
 using namespace NewYorkTime;
 
 static int fileSize = 300 << 20;
 string dir = "../../TestData/";
 
-void genHead(){
-	MultiFile * list = new MultiFile("../../TestData/list", false);
-	list->setFileSize(fileSize);
-	list->create();
-	delete list;
-
-	InvertedList *il = new InvertedList("../../TestData/list", "../../TestData/tmp");
-	il->create();
-
-	int fileCnt = 0, pageCnt = 0;
-	fprintf(stderr, "Reading xml files...\n");
-	vector<string> xmls = getFiles("*.xml", "../../TestData/xml");
-	for (unsigned int i = 0; i < xmls.size(); i++){
-		Xml xml(readFile(xmls[i]));
-		//cout << i<< xmls[i] << endl;
-		string s = (xml.getRoot().getNodesByTag("head"))[0]->getAllText();
-		Page p;
-		p.content = parse(removePunction(s));
-		const XmlNode * node = xml.getRoot().getNodeByTag("title");
-		if (node != NULL)
-			p.title = node->getAllText();
-		else
-			p.title = "";
-		//cout << "befor feed" << endl;
-		il->feed(p);
-		//cout << "after feed" << endl;
-		fileCnt++;
-		if (fileCnt % 1000 == 0)
-			printf("%d ", fileCnt);
-	}
-	il->mergSort(fileSize);
-	il->finish();
-	delete il;
-}
 
 inline double bm25(double n, double N, double f, double dlrate = 1, double qf = 1, double r = 0, double R = 0, double k1 = 1.2, double k2 = 100, double b = 0.75){
 	double K = k1*((1 - b) + b*dlrate);
@@ -55,7 +20,46 @@ inline double bm25(double n, double N, double f, double dlrate = 1, double qf = 
 	return log10(first) *second * third;
 }
 
-void query(InvertedList *il,string s){
+
+
+void genHead(){
+	/*MultiFile * list = new MultiFile("../../TestData/list", false);
+	list->setFileSize(fileSize);
+	list->create();
+	delete list;*/
+
+	InvertedList *il = new InvertedList("../../TestData/list", "../../TestData/tmp");
+	il->create();
+
+	int fileCnt = 0, pageCnt = 0;
+	fprintf(stderr, "Reading xml files...\n");
+	vector<string> xmls = getFiles("*.tgz", "../../TestData");
+	for (unsigned int i = 0; i < xmls.size(); i++){
+		ZReader z;
+		z.readFromFile(xmls[i]);
+		while (z.nextEntry(FileType::Regular)){
+			Xml xml(z.read());
+			string s = (xml.getRoot().getNodesByTag("head"))[0]->getAllText();
+			Page p;
+			p.content = addTagP(toLower(removePunction(s)));
+			const XmlNode * node = xml.getRoot().getNodeByTag("title");
+			if (node != NULL)
+				p.title = node->getAllText();
+			else
+				p.title = "";
+			il->feed(p);
+			fileCnt++;
+			if (fileCnt % 1000 == 0)
+				printf("%d ", fileCnt);
+		}
+	}
+	il->mergSort(fileSize);
+	il->finish();
+	delete il;
+}
+
+
+void  query(InvertedList *il, string s){
 	struct Score{
 		int id;
 		double score;
@@ -136,7 +140,7 @@ void evaluate(){
 		getline(cin, line);
 		//std::chrono::milliseconds start = std::chrono::duration_cast< std::chrono::milliseconds >(std::chrono::high_resolution_clock::now().time_since_epoch()), end;
 
-		query(il,line);
+		query(il, line);
 
 		//end = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now().time_since_epoch());
 		//long long sec = (end - start).count();// -start.count();

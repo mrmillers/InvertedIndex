@@ -14,29 +14,26 @@
 * To compile:
 * gcc -Wall -o tarfilter tarfilter.c -larchive -lz -lbz2
 */
-
-#include <sys/stat.h>
 #include "zreader.h"
-
-#include "archive.h"
-#include "archive_entry.h"
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <iostream>
 
 using namespace std;
 using namespace NewYorkTime;
 int main(int argc, char **argv){
 	{
 		ZReader z;
+		//archive_errno(NULL);
 	}
 	ZReader z;
 	z.readFromFile("../../TestData/01.tgz");
 	string t;
-	for (int i = 0; i < 10;i++){
-		z.nextEntry(FileType::Regular);
+	int n = 0;
+	while (z.nextEntry(FileType::Regular)){
+		
 		t = z.read();
-		cout << t << endl;
+		++n;
+
+		//cout << t << endl;
 	}
 	return 0;
 }

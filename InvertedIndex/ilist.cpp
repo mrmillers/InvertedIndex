@@ -18,15 +18,15 @@ InvertedList::InvertedList(char *listDir,char *tmpDir,bool isDebug){
 	
 	path = (char*)malloc(sizeof(char) * (strlen(listDir)+2));
 	strcpy(path,listDir);
-	tmpStr = (char*)malloc(sizeof(char)*(strlen(path) + 20));
-	
-	
-	tmpFile = new MultiFile(tmpDir,!isDebug);
-	tmpFile->create();
 	listFile = new MultiFile(path);
 	listFile->load();
-	
-	
+
+
+	if (tmpDir != NULL){
+		tmpStr = (char*)malloc(sizeof(char)*(strlen(path) + 20));
+		tmpFile = new MultiFile(tmpDir, !isDebug);
+		tmpFile->create();
+	}
 }
 InvertedList::~InvertedList(){
 	if (iUrl!=NULL) fclose(iUrl);

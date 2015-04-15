@@ -7,7 +7,6 @@
 #include <map>
 #include "multifile.h"
 #include "compresser.h"
-#include "gzreader.h"
 namespace NewYorkTime{
 	struct Page{
 		std::string title;
@@ -16,7 +15,7 @@ namespace NewYorkTime{
 
 	class InvertedList{
 	public:
-		InvertedList(char * listDir, char *tmpDir, bool isDebug = false);
+		InvertedList(char * listDir, char *tmpDir = NULL, bool isDebug = false);
 		~InvertedList();
 
 		//for generate 

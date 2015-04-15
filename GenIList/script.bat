@@ -1,2 +1,2 @@
-cd ../../TestData/xml
-dir /b /s *.xml > fileList
+cd ../../TestData
+dir /b /s *.tgz > fileList
