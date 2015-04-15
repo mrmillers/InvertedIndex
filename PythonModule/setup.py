@@ -1,3 +1,4 @@
+#!/usr/bin/python
 from distutils.core import setup, Extension
 #SET VS90COMNTOOLS=%VS120COMNTOOLS%
 module1 = Extension('nytquery',
