@@ -20,6 +20,8 @@ module1 = Extension('nytquery',
                     sources = [
                     'nytquery.cpp',
                     '../InvertedIndex/ilist.cpp',
+                    '../InvertedIndex/multifile.cpp',
+                    '../InvertedIndex/compresser.cpp',
                     #'../InvertedIndex/multi'
                     ])
 
