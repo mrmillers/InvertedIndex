@@ -53,7 +53,7 @@ void InvertedList::feed(const Page& page){
 	urlCnt++;
 	char * lexs = copyStr(page.content.c_str());
 	char * back = lexs;
-	std::map<int,std::vector<int>>docWord;
+	std::map<int,std::vector<int> >docWord;
 	int id,pos = 0;
 	char* tag,*lex;
 
@@ -88,7 +88,7 @@ void InvertedList::feed(const Page& page){
 
 	unsigned int *buffer = NULL;
 	unsigned int *outBuffer = NULL;
-	for (std::map<int,std::vector<int>>::iterator it=docWord.begin(); it!=docWord.end(); ++it){
+	for (std::map<int,std::vector<int> >::iterator it=docWord.begin(); it!=docWord.end(); ++it){
 		int iCnt = it->second.size() / 2;  //# of intergers
 		
 		buffer = (unsigned int *)realloc(buffer,sizeof(unsigned int)*(iCnt * 2 + 10));

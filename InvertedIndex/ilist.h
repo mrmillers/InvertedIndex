@@ -47,11 +47,13 @@ namespace NewYorkTime{
 			std::vector<int> pos;
 		};
 
-		struct cmp_str{
-			bool operator()(char const *a, char const *b){
+		/*struct cmp_str{
+			bool operator() (char *a, char *b){
 				return strcmp(a, b) < 0;
 			}
-		};
+			
+
+		};*/
 		struct WordInfo{
 			WordInfo();
 			//~WordInfo();
@@ -80,7 +82,7 @@ namespace NewYorkTime{
 		MultiFile* tmpFile, *listFile;
 		FILE *iUrl, *iLex, *fDebug;
 
-		std::map<char *, int, cmp_str> wordsID;
+		std::map<std::string, int> wordsID;
 		std::map<int, ListHead> idDocList;
 		std::vector<char *>idWords;
 		std::vector<WordInfo> wordsList;
