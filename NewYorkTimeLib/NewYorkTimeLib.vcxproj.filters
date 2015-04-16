@@ -26,9 +26,6 @@
     <ClCompile Include="..\InvertedIndex\multifile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\InvertedIndex\gzreader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\InvertedIndex\compresser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

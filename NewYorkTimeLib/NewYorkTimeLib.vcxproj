@@ -84,7 +84,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\InvertedIndex\compresser.cpp" />
-    <ClCompile Include="..\InvertedIndex\gzreader.cpp" />
     <ClCompile Include="..\InvertedIndex\ilist.cpp" />
     <ClCompile Include="..\InvertedIndex\multifile.cpp" />
     <ClCompile Include="..\TarGzReader\zreader.cpp" />
