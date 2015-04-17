@@ -7,6 +7,7 @@ namespace NewYorkTime{
 	PyMODINIT_FUNC initnytquery(void);
 	static PyObject * query(PyObject *self, PyObject * args);
 	static PyObject * init(PyObject *self, PyObject * args);
+	static PyObject * close(PyObject *self, PyObject * args);
 }
 
 

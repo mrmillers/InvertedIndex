@@ -6,7 +6,7 @@ class Compresser{
 public:
 	virtual int compress(unsigned int *in, unsigned int*& out, int inSize,int outSize) = 0;
 	virtual int uncompress(unsigned int *in, unsigned int*& out, int inSize,int outSize) = 0;
-
+	virtual ~Compresser(){}
 };
 
 class Simple9:public Compresser{

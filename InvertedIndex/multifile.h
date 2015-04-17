@@ -16,7 +16,7 @@ public:
 		bool operator <= (FilePos &y);// { return *this < y || *this == y; };
 		bool operator < (FilePos &y);// { return y > *this; };
 	};
-	MultiFile(char *path,bool tmp = false);
+	MultiFile(char *path,char * name = "", bool tmp = false);
 	~MultiFile();
 	void load();
 	void setFileSize(int size);
@@ -34,7 +34,7 @@ public:
 	FilePos getCurPos();
 private:
 	FILE *fp;
-	char *path, *tmpStr;
+	char *path, *tmpStr, *name;
 	int fileSize;
 	FilePos endPos,curPos;
 	bool isTmp;

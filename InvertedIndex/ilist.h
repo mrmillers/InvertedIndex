@@ -26,6 +26,7 @@ namespace NewYorkTime{
 
 		//for query
 		void load();
+		std::string query(int k,std::string keywords);
 		int openList(const char * word);
 		void closeList(int id);
 		int nextGEQ(int id, int docID);
@@ -46,14 +47,6 @@ namespace NewYorkTime{
 			std::vector<int> tag;
 			std::vector<int> pos;
 		};
-
-		/*struct cmp_str{
-			bool operator() (char *a, char *b){
-				return strcmp(a, b) < 0;
-			}
-			
-
-		};*/
 		struct WordInfo{
 			WordInfo();
 			//~WordInfo();
