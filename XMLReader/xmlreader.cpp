@@ -54,6 +54,14 @@ const XmlNode* XmlNode::getNodeByAttr(const std::string & attr, const std::strin
 	}
 	return NULL;
 }
+
+string XmlNode::getAttrValue(const string & attr)const{
+	if (this->attr.find(attr) != this->attr.end()){
+		return this->attr.at(attr);
+	}
+	return "";
+}
+
 ostream & NewYorkTime::operator << (ostream & os, const XmlNode& xn) {
 	os << "<" << xn.tag << " ";
 	for (std::map<std::string, std::string>::const_iterator itr = xn.attr.begin(); itr != xn.attr.end(); ++itr){

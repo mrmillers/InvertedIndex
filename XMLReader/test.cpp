@@ -28,7 +28,12 @@ int main(){
 	}
 	cout << "------------------------------------------" << endl;
 	const XmlNode * tt = x.getRoot().getNodeByTag("w");
-	cout << tt;
+	cout << tt<<endl;
+
+
+	tt = x.getRoot().getNodeByAttr("name","publication_day_of_week");
+	cout << *tt <<endl;
+	cout << tt->getAttrValue("content");
 	system("pause");
 	return 0;
 }
