@@ -22,7 +22,38 @@ void NewYorkTime::replace(string & s){
 		}
 	}
 }
+vector<const XmlNode*> XmlNode::getNodesByAttr(const string & attr, const string & value,vector<const XmlNode*>* vec)const{
+	vector<const XmlNode*>* tmp;
+	vector<const XmlNode*>& ret = (vec == NULL) ? *(tmp = new vector<const XmlNode*>) : *vec;
+	
+	if (this->attr.find(attr) != this->attr.end() && this->attr.at(attr) == value){
+		ret.push_back(this);
+	}
+	
+	for (int i = 0; i < nodes.size(); i++){
+		nodes[i]->getNodesByAttr(attr, value, &ret);
+	}
+	if (tmp != NULL){
+		vector<const XmlNode*> ans(*tmp);
+		delete tmp;
+		return ans;
+	}
+	else
+		return ret;
+}
 
+
+const XmlNode* XmlNode::getNodeByAttr(const std::string & attr, const std::string & value)const{
+	if (this->attr.find(attr) != this->attr.end() && this->attr.at(attr) == value){
+		return this;
+	}
+	for (int i = 0; i < nodes.size(); i++){
+		const XmlNode * t = nodes[i]->getNodeByAttr(attr,value);
+		if (t != NULL)
+			return t;
+	}
+	return NULL;
+}
 ostream & NewYorkTime::operator << (ostream & os, const XmlNode& xn) {
 	os << "<" << xn.tag << " ";
 	for (std::map<std::string, std::string>::const_iterator itr = xn.attr.begin(); itr != xn.attr.end(); ++itr){

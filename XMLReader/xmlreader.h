@@ -21,6 +21,10 @@ namespace NewYorkTime{
 		void getNodesByTag(std::string tag, std::vector<const XmlNode*>& v)const;
 		std::vector<const XmlNode*> getNodesByTag(std::string tag)const;
 		const XmlNode* getNodeByTag(const std::string& tag)const;
+		
+		std::vector<const XmlNode*> getNodesByAttr(const std::string & attr,const std::string & value,std::vector<const XmlNode*>* = NULL)const;
+		const XmlNode* getNodeByAttr(const std::string & attr,const std::string & value)const;
+
 		friend std::ostream & operator << (std::ostream & os, const XmlNode& xn);
 	private:
 		std::string  text, tag;
