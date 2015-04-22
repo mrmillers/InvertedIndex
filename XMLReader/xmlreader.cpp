@@ -22,14 +22,14 @@ void NewYorkTime::replace(string & s){
 		}
 	}
 }
-vector<const XmlNode*> XmlNode::getNodesByAttr(const string & attr, const string & value,vector<const XmlNode*>* vec)const{
-	vector<const XmlNode*>* tmp;
+vector<const XmlNode*> XmlNode::getNodesByAttr(const string & attr, const string & value, vector<const XmlNode*>* vec)const{
+	vector<const XmlNode*>* tmp = NULL;
 	vector<const XmlNode*>& ret = (vec == NULL) ? *(tmp = new vector<const XmlNode*>) : *vec;
-	
+
 	if (this->attr.find(attr) != this->attr.end() && this->attr.at(attr) == value){
 		ret.push_back(this);
 	}
-	
+
 	for (int i = 0; i < nodes.size(); i++){
 		nodes[i]->getNodesByAttr(attr, value, &ret);
 	}
@@ -48,7 +48,7 @@ const XmlNode* XmlNode::getNodeByAttr(const std::string & attr, const std::strin
 		return this;
 	}
 	for (int i = 0; i < nodes.size(); i++){
-		const XmlNode * t = nodes[i]->getNodeByAttr(attr,value);
+		const XmlNode * t = nodes[i]->getNodeByAttr(attr, value);
 		if (t != NULL)
 			return t;
 	}
@@ -134,7 +134,7 @@ XmlNode::XmlNode(string content) :isSimpleTag(true){
 	replace(text);
 
 }
-XmlNode::XmlNode(const XmlNode & x):text(x.text), tag(x.tag), attr(x.attr){
+XmlNode::XmlNode(const XmlNode & x) :text(x.text), tag(x.tag), attr(x.attr){
 	for (unsigned int i = 0; i < nodes.size(); i++){
 		nodes[i] = new XmlNode(*x.nodes[i]);
 	}

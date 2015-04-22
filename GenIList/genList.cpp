@@ -57,7 +57,7 @@ void evaluate(){
 		getline(cin, line);
 		//std::chrono::milliseconds start = std::chrono::duration_cast< std::chrono::milliseconds >(std::chrono::high_resolution_clock::now().time_since_epoch()), end;
 		cout << "starting query " << line << endl;
-		cout<< il->query(20,line);
+		cout << il->query(20, line);
 		//end = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now().time_since_epoch());
 		//long long sec = (end - start).count();// -start.count();
 
