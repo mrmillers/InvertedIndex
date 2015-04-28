@@ -38,5 +38,8 @@
     <ClCompile Include="..\TarGzReader\zreader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\SQL\mysql.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

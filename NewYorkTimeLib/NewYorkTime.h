@@ -10,6 +10,6 @@
 #include "InvertedIndex/ilist.h"
 #include "InvertedIndex/multifile.h"
 
-
+#include "SQL/mysql.h"
 
 #endif //NEWYORKTIME

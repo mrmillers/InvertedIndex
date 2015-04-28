@@ -37,7 +37,7 @@ void genHead(){
 			if (pageCnt % 1000 == 0)
 				printf("%d ", pageCnt);
 		}
-		printf("%d\n",tgz.size()-i);
+		printf("%d\n", tgz.size() - i);
 	}
 	il->mergSort(fileSize);
 	il->finish();
@@ -76,12 +76,75 @@ void genBody(){
 }
 
 void genSQL(){
+	SQL sql_n("tcp://127.0.0.1:3306", "root", "", "nyt");
+	SQL sql_a("tcp://127.0.0.1:3306", "root", "", "nyt");
+	SQL sql_l("tcp://127.0.0.1:3306", "root", "", "nyt");
+	SQL sql_t("tcp://127.0.0.1:3306", "root", "", "nyt");
 
-	//SQL sql_n("tcp://127.0.0.1:3306", "root", "", "nyt");
-	//SQL sql_a("tcp://127.0.0.1:3306", "root", "", "nyt");
-	//SQL sql_l("tcp://127.0.0.1:3306", "root", "", "nyt");
-	//SQL sql_t("tcp://127.0.0.1:3306", "root", "", "nyt");
 
+	int pageCnt = 0;
+	fprintf(stderr, "Reading xml files...\n");
+	vector<string> tgz = getFiles("*.tgz", dir.c_str());
+	for (unsigned int i = 0; i < tgz.size(); i++){
+		ZReader z;
+		z.readFromFile(tgz[i]);
+		while (z.nextEntry(FileType::Regular)){
+			Xml xml(z.read());
+			const XmlNode& node = xml.getRoot();
+			vector<string> v;
+			v.push_back(to_string(pageCnt));
+
+			v.push_back("");
+			vector<const XmlNode*> author = node.getNodesByTag("person");
+			for (int j = 0; j < author.size(); j++){
+				v[1] += author[j]->getAllText() + "\n";
+			}
+
+			v.push_back("");
+			vector<const XmlNode*> location = node.getNodesByTag("location");
+			for (int j = 0; j < location.size(); j++){
+				v[2] += location[j]->getAllText() + "\n";
+			}
+
+			v.push_back(node.getNodeByAttr("name", "publication_year")->getAttrValue("content") + "-" + node.getNodeByAttr("name", "publication_month")->getAttrValue("content") + "-" + node.getNodeByAttr("name", "publication_day_of_month")->getAttrValue("content"));
+
+			const XmlNode * t = xml.getRoot().getNodeByTag("title");
+			if (t != NULL)
+				v.push_back(t->getAllText());
+			else
+				v.push_back("");
+
+
+			string content = node.getNodeByTag("body")->getAllText();
+			v.push_back(content);
+
+			sql_n.insert("search_news", v);
+
+			vector<string> vtmp;
+			vtmp.push_back("0");
+			vtmp.push_back(v[3]);
+			vtmp.push_back("0");
+			vtmp.push_back(to_string(pageCnt));
+
+			sql_t.insert("search_newsdate", vtmp);
+
+			for (int j = 0; j < author.size(); j++){
+				vtmp[1] = author[j]->getAllText();
+				sql_a.insert("search_people", vtmp);
+			}
+
+			for (int j = 0; j < location.size(); j++){
+				vtmp[1] = location[j]->getAllText();
+				sql_l.insert("search_location", vtmp);
+			}
+
+
+			pageCnt++;
+			if (pageCnt % 100 == 0)
+				printf("%d ", pageCnt);
+		}
+		printf("%d\n", tgz.size() - i);
+	}
 
 }
 void evaluate(){
@@ -105,6 +168,8 @@ void evaluate(){
 int main(){
 	//genHead();
 	//genBody();
-	evaluate();
-	
+	genSQL();
+	system("pause");
+	//evaluate();
+
 }

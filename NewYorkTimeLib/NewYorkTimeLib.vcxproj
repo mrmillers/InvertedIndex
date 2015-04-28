@@ -39,10 +39,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>..;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Program Files %28x86%29\MySQL\Connector.C++ 1.1\include;..;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>..;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Program Files %28x86%29\MySQL\Connector.C++ 1.1\include;..;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -55,10 +55,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <ProjectReference>
-      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <Lib>
-      <AdditionalDependencies>zdll.lib;../Debug/archive_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>zdll.lib;mysqlcppconn.lib;../Debug/archive_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -76,8 +76,11 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>zdll.lib;../Release/archive_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>zdll.lib;mysqlcppconn.lib;../Release/archive_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="NewYorkTime.h" />
@@ -86,6 +89,7 @@
     <ClCompile Include="..\InvertedIndex\compresser.cpp" />
     <ClCompile Include="..\InvertedIndex\ilist.cpp" />
     <ClCompile Include="..\InvertedIndex\multifile.cpp" />
+    <ClCompile Include="..\SQL\mysql.cpp" />
     <ClCompile Include="..\TarGzReader\zreader.cpp" />
     <ClCompile Include="..\XMLReader\textparser.cpp" />
     <ClCompile Include="..\XMLReader\xmlreader.cpp" />

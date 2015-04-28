@@ -145,7 +145,9 @@ string XmlNode::getAllText() const{
 	else{
 		std::string ret;
 		for (unsigned int i = 0; i < nodes.size(); i++){
-			ret += nodes[i]->getAllText() + " ";
+			string t = nodes[i]->getAllText();
+			if (t.length()>0)
+				ret += t + "\n";
 		}
 		return ret;
 	}
