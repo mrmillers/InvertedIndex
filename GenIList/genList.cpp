@@ -9,26 +9,22 @@ using namespace std;
 using namespace NewYorkTime;
 
 static int fileSize = 300 << 20;
-string dir = "../../TestData/";
+string dir = "../../Data/";
 
 void genHead(){
-	/*MultiFile * list = new MultiFile("../../TestData/list", false);
-	list->setFileSize(fileSize);
-	list->create();
-	delete list;*/
 
-	InvertedList *il = new InvertedList("../../TestData/list", "../../TestData/tmp");
+	InvertedList *il = new InvertedList("../../listHead", "../../TestData/tmp");
 	il->create();
 
-	int fileCnt = 0, pageCnt = 0;
+	int pageCnt = 0;
 	fprintf(stderr, "Reading xml files...\n");
-	vector<string> xmls = getFiles("*.tgz", "../../TestData");
-	for (unsigned int i = 0; i < xmls.size(); i++){
+	vector<string> tgz = getFiles("*.tgz", dir.c_str());
+	for (unsigned int i = 0; i < tgz.size(); i++){
 		ZReader z;
-		z.readFromFile(xmls[i]);
+		z.readFromFile(tgz[i]);
 		while (z.nextEntry(FileType::Regular)){
 			Xml xml(z.read());
-			string s = (xml.getRoot().getNodesByTag("head"))[0]->getAllText();
+			string s = xml.getRoot().getNodeByTag("head")->getAllText();
 			Page p;
 			p.content = addTagP(toLower(removePunction(s)));
 			const XmlNode * node = xml.getRoot().getNodeByTag("title");
@@ -37,19 +33,59 @@ void genHead(){
 			else
 				p.title = "";
 			il->feed(p);
-			fileCnt++;
-			if (fileCnt % 1000 == 0)
-				printf("%d ", fileCnt);
+			pageCnt++;
+			if (pageCnt % 1000 == 0)
+				printf("%d ", pageCnt);
 		}
+		printf("%d\n",tgz.size()-i);
+	}
+	il->mergSort(fileSize);
+	il->finish();
+	delete il;
+}
+void genBody(){
+	InvertedList *il = new InvertedList("../../listBody", "../../TestData/tmp");
+	il->create();
+
+	int pageCnt = 0;
+	fprintf(stderr, "Reading xml files...\n");
+	vector<string> tgz = getFiles("*.tgz", dir.c_str());
+	for (unsigned int i = 0; i < tgz.size(); i++){
+		ZReader z;
+		z.readFromFile(tgz[i]);
+		while (z.nextEntry(FileType::Regular)){
+			Xml xml(z.read());
+			string s = xml.getRoot().getNodeByTag("body")->getAllText();
+			Page p;
+			p.content = addTagP(toLower(removePunction(s)));
+			const XmlNode * node = xml.getRoot().getNodeByTag("title");
+			if (node != NULL)
+				p.title = node->getAllText();
+			else
+				p.title = "";
+			il->feed(p);
+			pageCnt++;
+			if (pageCnt % 1000 == 0)
+				printf("%d ", pageCnt);
+		}
+		printf("%d\n", tgz.size() - i);
 	}
 	il->mergSort(fileSize);
 	il->finish();
 	delete il;
 }
 
+void genSQL(){
 
+	//SQL sql_n("tcp://127.0.0.1:3306", "root", "", "nyt");
+	//SQL sql_a("tcp://127.0.0.1:3306", "root", "", "nyt");
+	//SQL sql_l("tcp://127.0.0.1:3306", "root", "", "nyt");
+	//SQL sql_t("tcp://127.0.0.1:3306", "root", "", "nyt");
+
+
+}
 void evaluate(){
-	InvertedList *il = new InvertedList("../../TestData/list");
+	InvertedList *il = new InvertedList("../../listHead");
 	il->load();
 	cout << endl << "Input your queries, Type QUIT to quit" << endl;
 	string line("");
@@ -67,10 +103,8 @@ void evaluate(){
 }
 
 int main(){
-	genHead();
+	//genHead();
+	//genBody();
 	evaluate();
-	/*string s = "asfi!d0)dfih,,fd df;; \t dfd\ndfih++";
-	s = removePunction(s);
-	cout << s;
-	system("pause");*/
+	
 }

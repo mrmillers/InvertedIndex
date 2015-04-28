@@ -23,6 +23,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NewYorkTimeLib", "NewYorkTi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PythonModule", "PythonModule\PythonModule.vcxproj", "{6D4A97B9-7D26-48D8-B193-FCAEC75E2F5F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQL", "SQL\SQL.vcxproj", "{407FC702-B79A-409A-945A-72E235BA789C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -53,6 +55,10 @@ Global
 		{6D4A97B9-7D26-48D8-B193-FCAEC75E2F5F}.Debug|Win32.Build.0 = Debug|Win32
 		{6D4A97B9-7D26-48D8-B193-FCAEC75E2F5F}.Release|Win32.ActiveCfg = Release|Win32
 		{6D4A97B9-7D26-48D8-B193-FCAEC75E2F5F}.Release|Win32.Build.0 = Release|Win32
+		{407FC702-B79A-409A-945A-72E235BA789C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{407FC702-B79A-409A-945A-72E235BA789C}.Debug|Win32.Build.0 = Debug|Win32
+		{407FC702-B79A-409A-945A-72E235BA789C}.Release|Win32.ActiveCfg = Release|Win32
+		{407FC702-B79A-409A-945A-72E235BA789C}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
