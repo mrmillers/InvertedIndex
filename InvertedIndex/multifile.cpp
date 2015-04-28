@@ -1,16 +1,11 @@
 #include "multifile.h"
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-
+#include <cstdlib>
+#include <cstring>
+#include <cstdio>
+using namespace std;
 const int MultiFile::endOfFile = -1;
 
-MultiFile::MultiFile(char *path, char * name, bool tmp) {
-	this->path = new char[strlen(path) + 2];
-	this->tmpStr = new char[strlen(path) + strlen(name) + 2];
-	this->name = new char[strlen(name) + 10];
-	strcpy(this->path, path);
-	strcpy(this->name, name);
+MultiFile::MultiFile(const string& path, const string& name, bool tmp):path(path),name(name) {
 	fileSize = 300 << 20;
 
 	curPos.fileNum = -1;
@@ -23,23 +18,18 @@ MultiFile::~MultiFile(){
 	if (fp != NULL)
 		fclose(fp);
 	if (isTmp){
-		sprintf(tmpStr, "%s/setting", path);
-		remove(tmpStr);
+		remove((path + "/setting" + name).c_str());
 		for (int i = 0; i <= endPos.fileNum; i++){
-			sprintf(tmpStr, "%s/%d", path, i);
-			remove(tmpStr);
+			remove((path + "/" + to_string(i) + name).c_str());
 		}
 	}
 	else
 		create();
-	delete[] path;
-	delete[] tmpStr;
-	delete[] name;
+	
 }
 
 void MultiFile::create(){
-	sprintf(tmpStr, "%s/setting%s", path,name);
-	FILE* fp = fopen(tmpStr, "wb");
+	FILE* fp = fopen((path + "/setting" + name).c_str(), "wb");
 	fprintf(fp, "FileSize:%d\nFileCount:%d\nEndPos:%d\n", fileSize, endPos.fileNum + 1, endPos.filePos);
 	fclose(fp);
 
@@ -50,8 +40,7 @@ void MultiFile::create(){
 }
 
 void MultiFile::load(){
-	sprintf(tmpStr, "%s/setting%s", path,name);
-	FILE* fp = fopen(tmpStr, "rb");
+	FILE* fp = fopen((path + "/setting" + name).c_str(), "rb");
 	if (fp == NULL)
 		create();
 	else{
@@ -67,8 +56,7 @@ bool MultiFile::seek(FilePos pos){
 	if (pos >= endPos){
 		FILE *p;
 		for (int i = endPos.fileNum + 1; i <= pos.fileNum; i++){
-			sprintf(tmpStr, "%s/%d%s", path, i,name);
-			p = fopen(tmpStr, "wb");
+			p = fopen((path + "/" + to_string(i) + name).c_str(), "wb");
 			fclose(p);
 		}
 		endPos = pos;
@@ -78,8 +66,7 @@ bool MultiFile::seek(FilePos pos){
 			fclose(fp);
 		curPos.fileNum = pos.fileNum;
 		curPos.filePos = 0;
-		sprintf(tmpStr, "%s/%d%s", path, curPos.fileNum,name);
-		fp = fopen(tmpStr, "rb+");
+		fp = fopen((path + "/" + to_string(curPos.fileNum) + name).c_str(), "rb+");
 	}
 	//fseek(fp,pos.filePos,SEEK_SET);
 	fseek(fp, pos.filePos - curPos.filePos, SEEK_CUR);
@@ -98,12 +85,11 @@ void MultiFile::nextFile(){
 	if (fp != NULL)
 		fclose(fp);
 	curPos.fileNum++;
-	sprintf(tmpStr, "%s/%d%s", path, curPos.fileNum,name);
-	fp = fopen(tmpStr, "rb+");
+	fp = fopen((path + "/" + to_string(curPos.fileNum) + name).c_str(), "rb+");
 	if (fp == NULL){
-		fp = fopen(tmpStr, "wb");
+		fp = fopen((path + "/" + to_string(curPos.fileNum) + name).c_str(), "wb");
 		fclose(fp);
-		fp = fopen(tmpStr, "rb+");
+		fp = fopen((path + "/" + to_string(curPos.fileNum) + name).c_str(), "rb+");
 	}
 	curPos.filePos = 0;
 }
@@ -154,8 +140,7 @@ long MultiFile::write(const void *buf, long len){
 void MultiFile::flush(){
 	if (fp != NULL){
 		fclose(fp);
-		sprintf(tmpStr, "%s/%d%s", path, curPos.fileNum,name);
-		fp = fopen(tmpStr, "rb+");
+		fp = fopen((path + "/" + to_string(curPos.fileNum) + name).c_str(), "rb+");
 	}
 	create();
 }
@@ -192,5 +177,5 @@ bool MultiFile::FilePos::operator <= (FilePos &y){ return *this < y || *this == 
 bool MultiFile::FilePos::operator < (FilePos &y){ return y > *this; };
 
 const char* MultiFile::getDir(){
-	return path;
+	return path.c_str();
 }

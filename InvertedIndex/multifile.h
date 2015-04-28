@@ -1,6 +1,7 @@
 #ifndef MULTI_FILE
 #define MULTI_FILE
-#include <stdio.h>
+#include <cstdio>
+#include <string>
 
 class MultiFile{
 public:
@@ -16,7 +17,7 @@ public:
 		bool operator <= (FilePos &y);// { return *this < y || *this == y; };
 		bool operator < (FilePos &y);// { return y > *this; };
 	};
-	MultiFile(char *path,char * name = "", bool tmp = false);
+	MultiFile(const std::string& path,const std::string & name = "", bool tmp = false);
 	~MultiFile();
 	void load();
 	void setFileSize(int size);
@@ -34,7 +35,7 @@ public:
 	FilePos getCurPos();
 private:
 	FILE *fp;
-	char *path, *tmpStr, *name;
+	std::string path, name;
 	int fileSize;
 	FilePos endPos,curPos;
 	bool isTmp;

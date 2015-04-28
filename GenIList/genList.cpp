@@ -67,7 +67,7 @@ void evaluate(){
 }
 
 int main(){
-	//genHead();
+	genHead();
 	evaluate();
 	/*string s = "asfi!d0)dfih,,fd df;; \t dfd\ndfih++";
 	s = removePunction(s);
