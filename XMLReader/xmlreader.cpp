@@ -5,6 +5,11 @@ using namespace NewYorkTime;
 static string from[] = { "&lt;", "&gt;", "&amp;", "&apos;", "&quot;" };
 static string to[] = { "<", ">", "&", "'", "\"" };
 
+static const XmlNode* empty(){
+	static XmlNode xml("<e />");
+	return NULL;
+}
+
 void NewYorkTime::replace(string & s){
 	/*
 	&lt;	<	less than
@@ -52,7 +57,7 @@ const XmlNode* XmlNode::getNodeByAttr(const std::string & attr, const std::strin
 		if (t != NULL)
 			return t;
 	}
-	return NULL;
+	return empty();
 }
 
 string XmlNode::getAttrValue(const string & attr)const{
@@ -177,7 +182,7 @@ const XmlNode* XmlNode::getNodeByTag(const std::string& tag)const{
 	getNodesByTag(tag, v);
 	if (v.size()>0)
 		return v[0];
-	return NULL;
+	return empty();
 }
 XmlNode::~XmlNode(){
 	for (unsigned int i = 0; i < nodes.size(); i++)

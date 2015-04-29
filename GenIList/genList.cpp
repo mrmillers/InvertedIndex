@@ -106,8 +106,14 @@ void genSQL(){
 				v[2] += location[j]->getAllText() + "\n";
 			}
 
-			v.push_back(node.getNodeByAttr("name", "publication_year")->getAttrValue("content") + "-" + node.getNodeByAttr("name", "publication_month")->getAttrValue("content") + "-" + node.getNodeByAttr("name", "publication_day_of_month")->getAttrValue("content"));
-
+			const XmlNode * year, *month, *day;
+			year = node.getNodeByAttr("name", "publication_year");
+			month = node.getNodeByAttr("name", "publication_month");
+			day = node.getNodeByAttr("name", "publication_day_of_month");
+			if (year && month && day)
+				v.push_back(year->getAttrValue("content") + "-" + month->getAttrValue("content") + "-" + day->getAttrValue("content"));
+			else
+				v.push_back("");
 			const XmlNode * t = xml.getRoot().getNodeByTag("title");
 			if (t != NULL)
 				v.push_back(t->getAllText());

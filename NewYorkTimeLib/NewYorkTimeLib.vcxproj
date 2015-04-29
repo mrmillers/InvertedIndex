@@ -40,9 +40,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>C:\Program Files %28x86%29\MySQL\Connector.C++ 1.1\include;..;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\MySQL\Connector.C++ 1.1\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>C:\Program Files %28x86%29\MySQL\Connector.C++ 1.1\include;..;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\MySQL\Connector.C++ 1.1\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -58,7 +60,7 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <Lib>
-      <AdditionalDependencies>zdll.lib;mysqlcppconn.lib;../Debug/archive_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>zdll.lib;debug/mysqlcppconn.lib;../Debug/archive_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -76,7 +78,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>zdll.lib;mysqlcppconn.lib;../Release/archive_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>zdll.lib;opt/mysqlcppconn.lib;../Release/archive_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
