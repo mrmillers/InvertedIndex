@@ -174,8 +174,8 @@ void evaluate(){
 int main(){
 	//genHead();
 	//genBody();
-	genSQL();
-	system("pause");
-	//evaluate();
+	//genSQL();
+	//system("pause");
+	evaluate();
 
 }
